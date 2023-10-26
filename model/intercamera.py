@@ -1,9 +1,10 @@
-import time
 import pyrealsense2 as rs
 import numpy as np
-import cv2
+
+
 
 class Camera(object):
+    pass
     '''
     realsense相机处理类
     '''
@@ -35,3 +36,4 @@ class Camera(object):
  
     def release(self):
         self.pipeline.stop()
+

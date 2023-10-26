@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\project_meta\python\inter_camera\view\base_0.ui'
+# Form implementation generated from reading ui file 'd:\project_meta\python\inter_camera\view\layout\base_0.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -15,31 +15,48 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(636, 523)
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.Record_Button = QtWidgets.QPushButton(self.centralwidget)
         self.Record_Button.setGeometry(QtCore.QRect(60, 340, 75, 23))
         self.Record_Button.setObjectName("Record_Button")
+
         self.Start_Button = QtWidgets.QPushButton(self.centralwidget)
         self.Start_Button.setGeometry(QtCore.QRect(180, 340, 75, 23))
         self.Start_Button.setObjectName("Start_Button")
+
         self.Stop_Button = QtWidgets.QPushButton(self.centralwidget)
-        self.Stop_Button.setGeometry(QtCore.QRect(300, 340, 75, 23))
+        self.Stop_Button.setGeometry(QtCore.QRect(180, 390, 75, 23))
         self.Stop_Button.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.Stop_Button.setObjectName("Stop_Button")
+
         self.listView = QtWidgets.QListView(self.centralwidget)
         self.listView.setGeometry(QtCore.QRect(390, 340, 201, 121))
         self.listView.setObjectName("listView")
+
         self.getCameralist_Button = QtWidgets.QPushButton(self.centralwidget)
         self.getCameralist_Button.setGeometry(QtCore.QRect(60, 380, 91, 31))
         self.getCameralist_Button.setObjectName("getCameralist_Button")
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(70, 50, 381, 211))
         self.label.setObjectName("label")
+
+        self.pauseButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pauseButton.setGeometry(QtCore.QRect(290, 340, 75, 23))
+        self.pauseButton.setObjectName("pauseButton")
+
+        self.RecordFolderButton = QtWidgets.QPushButton(self.centralwidget)
+        self.RecordFolderButton.setGeometry(QtCore.QRect(290, 390, 75, 23))
+        self.RecordFolderButton.setObjectName("RecordFolderButton")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 636, 23))
         self.menubar.setObjectName("menubar")
+        
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -56,3 +73,6 @@ class Ui_MainWindow(object):
         self.Stop_Button.setText(_translate("MainWindow", "停止"))
         self.getCameralist_Button.setText(_translate("MainWindow", "获取相机列表"))
         self.label.setText(_translate("MainWindow", "TextLabel"))
+        self.pauseButton.setText(_translate("MainWindow", "暂停"))
+        self.RecordFolderButton.setText(_translate("MainWindow", "录制目录"))
+
