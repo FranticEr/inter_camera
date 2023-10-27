@@ -1,5 +1,9 @@
+import sys
+sys.coinit_flags=2
+import pythoncom
 import pyrealsense2 as rs
 import numpy as np
+import sys
 
 
 
@@ -36,4 +40,5 @@ class Camera(object):
  
     def release(self):
         self.pipeline.stop()
+    pass
 
