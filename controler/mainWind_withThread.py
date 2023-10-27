@@ -85,7 +85,9 @@ class recordThread(QThread):
         self.recordFolder_root=recordFolder_root
         print(self.recordFolder_root)
         self.recoding=False
-        self.queue=[]
+        self.rgb_queue=[]
+        self.depth_queue=[]
+        self.depth16_queue=[]
         self.start_recording()
 
     def start_recording(self):
@@ -97,16 +99,22 @@ class recordThread(QThread):
         os.mkdir(self.recordFolder)
         print(self.recordFolder)
         self.video_path=os.path.join(self.recordFolder,"rgb.mp4")
-        self.depth_path=os.path.join(self.recordFolder,"depthcolor.mp4")
-        self.depth16_path=os.path.join(self.recordFolder,"depth16.h5")
-        self.wr = cv2.VideoWriter(self.video_path, self.mp4, self.fps, (self.w, self.h), isColor=True)
-        self.wr_colordepth = cv2.VideoWriter(self.depth_path, self.mp4, self.fps, (self.w, self.h), isColor=True)
-        self.wr_depth = h5py.File(self.depth16_path, 'w')
+        self.depth_path=os.path.join(self.recordFolder,"depth.mp4")
+        self.depth16_path=os.path.join(self.recordFolder,"depth16.mp4")
+
+        self.wr = cv2.VideoWriter(self.video_path, self.mp4, self.fps, (self.w, self.h), isColor=True)#rgb
+
+        self.wr_depth = cv2.VideoWriter(self.depth_path, self.mp4, self.fps, (self.w, self.h), isColor=False)#黑白深度图
+        
+        self.wr_depthcolor = cv2.VideoWriter(self.depth16_path, self.mp4, self.fps, (self.w, self.h), isColor=True)#
+        
         self.recording=True
         print(self.recording)
         pass
     def add_frame(self,color_image, depth_image, colorizer_depth):
-        self.queue.append(color_image)
+        self.rgb_queue.append(color_image)
+        self.depth_queue.append(depth_image)
+        self.depth16_queue.append(colorizer_depth)
         pass
 
     def stop_recording(self):
@@ -115,11 +123,14 @@ class recordThread(QThread):
 
         self.recroding=False
         self.wr.release()
-        self.wr_colordepth.release()
+
+        self.wr_depth.release()
+        
+        self.wr_depthcolor.release()
 
         # wr_left.release()
         # wr_right.release()
-        self.wr_depth.close()
+        # self.wr_depth.close()
         print("release")
 
 
@@ -127,10 +138,19 @@ class recordThread(QThread):
     def run(self):
          print(self.recording)
          while self.recording:
-            if self.recording and len(self.queue) > 0:
+            if self.recording and len(self.rgb_queue) > 0:
                 #frames的顺序是[color_image, depth_image, colorizer_depth]
-                frame = self.queue.pop(0)
-                self.wr.write(frame) 
+                rgb_frame = self.rgb_queue.pop(0)
+                self.wr.write(rgb_frame)
+
+            if self.recording and len(self.depth_queue) > 0:
+                depth_frame=self.depth_queue.pop(0)
+                self.wr_depth.write(depth_frame)
+
+
+            if self.recording and len(self.depth16_queue) > 0:     
+                depth16_frame=self.depth16_queue.pop(0)
+                self.wr_depthcolor.write(depth16_frame)
                 
             else:
                 # 任务不占用主界面时间，可以进行其他操作
