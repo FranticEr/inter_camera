@@ -1,5 +1,7 @@
 # inter_camera
  inter d400系列摄像头python opencv pyqt5
+# 当前进度
+当前能够实现显示和记录rgb，但是在记录时监视画面会卡顿
 
  # references
 1. [【Intel Realsense D435】实现视频显示、录制和保存（Python）: from CSDN](https://blog.csdn.net/qq_41026536/article/details/127648496?spm=1001.2014.3001.5502)
